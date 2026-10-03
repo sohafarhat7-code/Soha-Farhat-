@@ -1,0 +1,122 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-canvas: #f9f9f9;
+  }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #f9f9f9;
+    color: #111111;
+    font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+/* Slower, visible shadow movement with minimal glitch displacement */
+@keyframes faceShadowGlitch {
+  0% {
+    transform: translate3d(0, 0, 0);
+    filter: contrast(100%) drop-shadow(0 0 0 rgba(0,0,0,0));
+  }
+  15% {
+    transform: translate3d(-1.5px, 0.8px, 0);
+    filter: contrast(126%) brightness(0.97) drop-shadow(-2px 1px 4px rgba(0,0,0,0.35));
+  }
+  35% {
+    transform: translate3d(1.2px, -0.6px, 0);
+    filter: contrast(118%) brightness(1.02) drop-shadow(2px -1px 3px rgba(0,0,0,0.22));
+  }
+  60% {
+    transform: translate3d(-0.6px, 0.4px, 0);
+    filter: contrast(110%) brightness(0.99) drop-shadow(-1px 1px 2px rgba(0,0,0,0.14));
+  }
+  85% {
+    transform: translate3d(0.4px, -0.2px, 0);
+    filter: contrast(104%) brightness(1.01) drop-shadow(0.5px 0 1px rgba(0,0,0,0.06));
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+    filter: contrast(100%) brightness(1) drop-shadow(0 0 0 rgba(0,0,0,0));
+  }
+}
+
+.animate-face-shadow-glitch {
+  animation: faceShadowGlitch 540ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Visible soft shadow sweep wave drifting over the face contour */
+@keyframes shadowWave {
+  0% {
+    transform: translateY(-60%) scaleY(0.7);
+    opacity: 0;
+  }
+  25% {
+    opacity: 0.38;
+    transform: translateY(-10%) scaleY(0.95);
+  }
+  60% {
+    opacity: 0.24;
+    transform: translateY(28%) scaleY(1.08);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(85%) scaleY(1.2);
+  }
+}
+
+.animate-shadow-sweep {
+  animation: shadowWave 540ms cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+/* Text shadow drift glitch for code-running decipher effect */
+@keyframes textShadowGlitch {
+  0% {
+    text-shadow: -2px 0 0 rgba(0, 0, 0, 0.35), 2px 0 0 rgba(0, 0, 0, 0.2);
+    opacity: 0.85;
+  }
+  30% {
+    text-shadow: 2px -0.8px 0 rgba(0, 0, 0, 0.28), -1px 0.8px 0 rgba(0, 0, 0, 0.18);
+    opacity: 0.92;
+  }
+  65% {
+    text-shadow: -0.8px 0.4px 0 rgba(0, 0, 0, 0.15);
+    opacity: 0.97;
+  }
+  100% {
+    text-shadow: none;
+    opacity: 1;
+  }
+}
+
+.animate-text-shadow-glitch {
+  animation: textShadowGlitch 520ms ease-out forwards;
+}
+
+/* Ambient subtle floating drift for faces that stops when a face is clicked */
+@keyframes slowFaceSway {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  25% {
+    transform: translate3d(-1px, 1.2px, 0);
+  }
+  50% {
+    transform: translate3d(1.2px, -0.8px, 0);
+  }
+  75% {
+    transform: translate3d(-0.8px, -1px, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.animate-slow-face-sway {
+  animation: slowFaceSway 7s ease-in-out infinite;
+}
